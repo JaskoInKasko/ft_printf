@@ -9,27 +9,7 @@
 /*   Updated: 2023/10/04 11:54:53 by jsakanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
-
-char ft_putchar(const char c)
-{
-    write(1, &c, 1);
-    return (1);
-}
-
-char ft_putstr(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(1 , &s[i], 1);
-		i++;
-	}
-    return (s[i]);
-}
 
 static int ft_specifier(const char str, va_list args)
 {
@@ -37,14 +17,14 @@ static int ft_specifier(const char str, va_list args)
 
     c = 0;
     if (str == 'c')
-        c += ft_putchar(va_arg(args, int));
+        c += ft_printchar(va_arg(args, int));
     else if (str == 's')
-        c += ft_putstr(va_arg(args, char *));
-    else if (str == 'p')
-        c +=
+        c += ft_printstr(va_arg(args, char *));
+    //else if (str == 'p')
+        //c += ft_printmem(va_arg(args, int));
     else if (str == 'd')
-        c +=
-    else if (str == 'i')
+        c += ft_printdigits(va_arg(args, int));
+    /*else if (str == 'i')
         c +=
     else if (str == 'u')
         c +=
@@ -53,7 +33,7 @@ static int ft_specifier(const char str, va_list args)
     else if (str == 'X')
         c +=
     else if (str == '%')
-        c +=
+        c +=*/
     return (c);
 }
 
@@ -62,28 +42,26 @@ int ft_printf(const char *format, ...)
     va_list arg;
 
     va_start(arg, format);
-    int c;
+    int len;
     int i;
 
-    c = 0;
+    len = 0;
     i = 0;
     while(format[i] != '\0')
     {
         if(format[i] == '%')
-            c += ft_specifier(format[i + 1], arg);
+            len += ft_specifier(format[++i], arg);
         else
-            c += ft_putchar(format[i]);
+            len += ft_printchar(format[i]);
         i++;
     }
     va_end(arg);
-    return (c);
+    return (len);
 }
-
+/*#include <stdio.h>
 int main(void)
 {
-    char    c;
-
-    c = 'a';
-    ft_printf("fdfdf");
+    ft_printf("%d", 123);
+    //printf("%x", c);
     return (0);
-}
+}*/

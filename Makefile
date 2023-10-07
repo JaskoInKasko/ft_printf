@@ -1,7 +1,7 @@
-CC = CC
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 HEAD = ft_printf.h
-SRC =
+SRC = ft_printf.c ft_printchar.c ft_printstr.c ft_printdigits.c\
 
 OBJ = $(SRC:.c=.o)
 NAME = libftprintf.a
@@ -14,7 +14,7 @@ $(NAME): $(OBJ)
 .PHONY: all clean fclean re
 
 clean:
-	rm -f $(OBJ) $(BONUSOBJ)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
