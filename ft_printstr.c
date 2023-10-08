@@ -13,13 +13,20 @@
 
 int	ft_printstr(const char *s)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (s[i] != '\0')
+	if(!s)
 	{
-		write(1 , &s[i], 1);
-		i++;
+		return(write(1, "(null)", 6));
 	}
-	return (s[i]);
+	else
+	{
+		while (s[i] != '\0')
+		{
+			write(1 , &s[i], 1);
+			i++;
+		}
+	}
+	return (i);
 }

@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printdigits.c                                   :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsakanov <jsakanov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 17:14:42 by jsakanov          #+#    #+#             */
-/*   Updated: 2023/10/07 17:14:50 by jsakanov         ###   ########.fr       */
+/*   Created: 2023/10/04 11:54:48 by jsakanov          #+#    #+#             */
+/*   Updated: 2023/10/04 11:54:53 by jsakanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int ft_printdigits(long n)
+unsigned int ft_print_uint(long n, int len)
 {
-    if(n >= 0 && n < 10)
+    if (n >= 0 && n < 10)
+        len += ft_printchar(n + '0');
+    else
     {
-        n += '0';
-        write(1, &n, 1);
+        len += ft_print_uint(n / 10, 0);
+        len += ft_print_uint(n % 10, 0);
     }
-    else if (n >= 10)
-    {
-        ft_printdigits(n / 10);
-        ft_printdigits(n % 10);
-    }
-    else if (n < 0)
-    {
-        write(1, "-", 1);
-        n = n * (-1);
-        ft_printdigits(n / 10);
-        ft_printdigits(n % 10); 
-    }
-    return (n);
+    return (len);
 }

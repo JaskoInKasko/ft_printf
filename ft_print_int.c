@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printdigits.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsakanov <jsakanov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 17:15:13 by jsakanov          #+#    #+#             */
-/*   Updated: 2023/10/07 17:15:21 by jsakanov         ###   ########.fr       */
+/*   Created: 2023/10/07 17:14:42 by jsakanov          #+#    #+#             */
+/*   Updated: 2023/10/07 17:14:50 by jsakanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdarg.h>
-# include <unistd.h>
+#include "ft_printf.h"
 
-int ft_printf(const char *format, ...);
-int	ft_printchar(const char c);
-int	ft_printstr(const char *s);
-int ft_print_int(long n, int len);
-unsigned int ft_print_uint(long n, int len);
-
-#endif
+int ft_print_int(long n, int len)
+{
+    if (n < 0)
+    {
+        len += ft_printchar('-');
+        n = -n;
+    }
+    if (n < 10)
+        len += ft_printchar(n + '0');
+    else
+    {
+        len += ft_print_int(n / 10, 0);
+        len += ft_print_int(n % 10, 0);
+    }
+    return (len);
+}

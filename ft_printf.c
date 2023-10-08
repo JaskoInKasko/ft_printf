@@ -13,28 +13,26 @@
 
 static int ft_specifier(const char str, va_list args)
 {
-    int c;
+    int len;
 
-    c = 0;
+    len = 0;
     if (str == 'c')
-        c += ft_printchar(va_arg(args, int));
+        len += ft_printchar(va_arg(args, int));
     else if (str == 's')
-        c += ft_printstr(va_arg(args, char *));
+        len += ft_printstr(va_arg(args, char *));
     //else if (str == 'p')
         //c += ft_printmem(va_arg(args, int));
-    else if (str == 'd')
-        c += ft_printdigits(va_arg(args, int));
-    /*else if (str == 'i')
-        c +=
+    else if (str == 'd' || str == 'i')
+        len += ft_print_int(va_arg(args, int), len);
     else if (str == 'u')
-        c +=
-    else if (str == 'x')
+        len += ft_print_uint(va_arg(args, unsigned int), len);
+    /*else if (str == 'x')
         c +=
     else if (str == 'X')
         c +=
     else if (str == '%')
         c +=*/
-    return (c);
+    return (len);
 }
 
 int ft_printf(const char *format, ...)
@@ -61,7 +59,12 @@ int ft_printf(const char *format, ...)
 /*#include <stdio.h>
 int main(void)
 {
-    ft_printf("%d", 123);
-    //printf("%x", c);
+    ft_printf("%u", -1);
+    printf("\n");
+    //printf("%p", NULL);
+    //printf("\n");
+    printf("%u", -1);
+    printf("\n");
+    //ft_printf(" %s\n %s\n %s\n %s\n %s\n ", " - ", "", "4", "", "2 ");
     return (0);
 }*/
