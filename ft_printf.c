@@ -26,9 +26,9 @@ static int ft_specifier(const char str, va_list args)
         len += ft_print_int(va_arg(args, int), len);
     else if (str == 'u')
         len += ft_print_uint(va_arg(args, unsigned int), len);
-    /*else if (str == 'x')
-        c +=
-    else if (str == 'X')
+    else if (str == 'x')
+        c += ft_printhex(va_arg(args, unsigned int));
+    /*else if (str == 'X')
         c +=
     else if (str == '%')
         c +=*/
