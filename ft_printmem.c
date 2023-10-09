@@ -1,6 +1,6 @@
 /*#include "ft_printf.h"
 
-int ft_printmem(unsigned long long num)
+int ft_printmem(void *num)
 {
     
 }*/

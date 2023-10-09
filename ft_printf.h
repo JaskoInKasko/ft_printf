@@ -19,5 +19,7 @@ int	ft_printchar(const char c);
 int	ft_printstr(const char *s);
 int ft_print_int(long n, int len);
 unsigned int ft_print_uint(long n, int len);
+unsigned int ft_printhex(unsigned int n);
+//unsigned int ft_printheX(unsigned int n);
 
 #endif

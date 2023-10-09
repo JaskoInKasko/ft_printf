@@ -21,17 +21,17 @@ static int ft_specifier(const char str, va_list args)
     else if (str == 's')
         len += ft_printstr(va_arg(args, char *));
     //else if (str == 'p')
-        //c += ft_printmem(va_arg(args, int));
+        //len += ft_printmem(va_arg(args, int));
     else if (str == 'd' || str == 'i')
         len += ft_print_int(va_arg(args, int), len);
     else if (str == 'u')
         len += ft_print_uint(va_arg(args, unsigned int), len);
     else if (str == 'x')
-        c += ft_printhex(va_arg(args, unsigned int));
+        len += ft_printhex(va_arg(args, unsigned int));
     /*else if (str == 'X')
         c +=
     else if (str == '%')
-        c +=*/
+        c += write(1, "%", 1);*/
     return (len);
 }
 
