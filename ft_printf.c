@@ -27,11 +27,11 @@ static int ft_specifier(const char str, va_list args)
     else if (str == 'u')
         len += ft_print_uint(va_arg(args, unsigned int), len);
     else if (str == 'x')
-        len += ft_printhex(va_arg(args, unsigned int));
-    /*else if (str == 'X')
-        c +=
+        len += ft_printhex(va_arg(args, unsigned int), len);
+    else if (str == 'X')
+        len += ft_printheX(va_arg(args, unsigned int), len);
     else if (str == '%')
-        c += write(1, "%", 1);*/
+        len += ft_printchar(str);
     return (len);
 }
 
@@ -65,6 +65,13 @@ int main(void)
     //printf("\n");
     printf("%u", -1);
     printf("\n");
+    printf("%x", -1);
+    printf("\n");
+    ft_printf("%x", -1);
+    printf("\n");
+    printf("%%");
+    printf("\n");
+    ft_printf("%%");
     //ft_printf(" %s\n %s\n %s\n %s\n %s\n ", " - ", "", "4", "", "2 ");
     return (0);
 }*/
