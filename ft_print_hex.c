@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsakanov <jsakanov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 11:54:48 by jsakanov          #+#    #+#             */
-/*   Updated: 2023/10/04 11:54:53 by jsakanov         ###   ########.fr       */
+/*   Created: 2023/10/12 14:50:37 by jsakanov          #+#    #+#             */
+/*   Updated: 2023/10/12 15:01:25 by jsakanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-unsigned int ft_printhex(unsigned int n, int len)
+unsigned int	ft_print_hex(unsigned int n, int len)
 {
-    char base[17] = "0123456789abcdef";
+	char	*base;
 
-    if(n >= 16)
-    {
-        len += ft_printhex(n / 16, 0);
-        len += ft_printhex(n % 16, 0);
-    }
-    else if (n <= 16)
-        len += ft_printchar(base[n]);
-    return(len);
+	base = "0123456789abcdef";
+	if (n >= 16)
+	{
+		len += ft_print_hex(n / 16, 0);
+		len += ft_print_hex(n % 16, 0);
+	}
+	else if (n <= 16)
+		len += ft_printchar(base[n]);
+	return (len);
 }
