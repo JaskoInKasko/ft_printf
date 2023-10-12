@@ -21,5 +21,6 @@ int ft_print_int(long n, int len);
 unsigned int ft_print_uint(long n, int len);
 unsigned int ft_printhex(unsigned int n, int len);
 unsigned int ft_printheX(unsigned int n, int len);
+int ft_printmem(void *ptr, int len);
 
 #endif

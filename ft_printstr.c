@@ -16,7 +16,7 @@ int	ft_printstr(const char *s)
 	int i;
 
 	i = 0;
-	if(!s)
+	if(s == NULL)
 	{
 		return(write(1, "(null)", 6));
 	}

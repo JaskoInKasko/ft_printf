@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
-
-static int ft_specifier(const char str, va_list args)
+#include <stdio.h>
+static int ft_specifier(const char str, va_list args, int len)
 {
-    int len;
-
-    len = 0;
+    if(args == NULL)
+        return (write(1, "-1", 2));
     if (str == 'c')
         len += ft_printchar(va_arg(args, int));
     else if (str == 's')
         len += ft_printstr(va_arg(args, char *));
-    //else if (str == 'p')
-        //len += ft_printmem(va_arg(args, int));
+    else if (str == 'p')
+        len += ft_printmem(va_arg(args, void *), len);
     else if (str == 'd' || str == 'i')
         len += ft_print_int(va_arg(args, int), len);
     else if (str == 'u')
@@ -32,6 +31,11 @@ static int ft_specifier(const char str, va_list args)
         len += ft_printheX(va_arg(args, unsigned int), len);
     else if (str == '%')
         len += ft_printchar(str);
+    else
+    {
+        len += ft_printchar('%');
+        len += ft_printchar(str);
+    }
     return (len);
 }
 
@@ -45,21 +49,29 @@ int ft_printf(const char *format, ...)
 
     len = 0;
     i = 0;
+    if(format == NULL)
+        return (write(1, "", 0));
     while(format[i] != '\0')
     {
-        if(format[i] == '%')
-            len += ft_specifier(format[++i], arg);
-        else
+        if(format[i] == '%' && format[i + 1] != '\0')
+        {
+            len += ft_specifier(format[i + 1], arg, 0);
+            i++;
+        }
+        else if (format[i] == '%' && format[i - 1] != '%')
+            len += ft_printchar(format[i]);
+        else if (format[i] != '%')
             len += ft_printchar(format[i]);
         i++;
     }
     va_end(arg);
     return (len);
 }
-/*#include <stdio.h>
-int main(void)
-{
-    ft_printf("%u", -1);
+
+//#include <stdio.h>
+//int main(void)
+//{
+    /*ft_printf("%u", -1);
     printf("\n");
     //printf("%p", NULL);
     //printf("\n");
@@ -72,6 +84,17 @@ int main(void)
     printf("%%");
     printf("\n");
     ft_printf("%%");
-    //ft_printf(" %s\n %s\n %s\n %s\n %s\n ", " - ", "", "4", "", "2 ");
-    return (0);
-}*/
+    printf("\n");
+    printf("%p\n%p\n", 0, 0);
+    ft_printf("%p\n%p\n", 0, 0);
+    ft_printf(" %s\n %s\n %s\n %s\n %s\n ", " - ", "", "4", "", "2 ");
+    printf("\n");*/
+    //ft_printf("%%%");
+    //ft_printf(" %%   %%   %%%\n");
+    //ft_printf("%randomtext%\n");
+    //ft_printf("%%%%%\n");
+    //ft_printf("%ra%");
+    //printf("\n");
+    //ft_printf("sdfsdfsdf");
+    //return (0);
+//}
